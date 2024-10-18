@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="css/layout.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body class="hidden">
+    <div id="app">
+      <!-- intro -->
+      <transition name="fade">
+        <div v-if="introView" class="intro_wrap">
+          <p class="tit"><strong>Portfolio</strong></p>
+          <p class="text">Lee Sung Soo</p>
+        </div>
+      </transition>
+      <!-- contents -->
+      <div class="contents">
+        <!-- profile -->
+        <section id="section01">
+          <h1>
+            <strong
+              >UI / UX <span class="job">Web Publisher</span
+              ><span class="name">이성수</span></strong
+            >
+          </h1>
+          <ul class="profile_list">
+            <li v-for="(item, index) in items" :key="index">
+              <strong class="tit"></strong>
+            </li>
+          </ul>
+        </section>
+        <!-- skills -->
+        <section id="section02">
+          <p class="tit"><strong>Skills</strong></p>
+        </section>
+        <!-- career -->
+        <section id="section03">
+          <p class="tit"><strong>Career</strong></p>
+        </section>
+        <!-- etc / contact -->
+        <section id="section04">
+          <p class="tit"><strong>Etc / Contact</strong></p>
+        </section>
+      </div>
+      <!-- Top button -->
+      <button type="button" v-show="btnView" class="btn_top" @click="moveTop()">
+        <span class="text blind">상단으로 이동</span>
+      </button>
+    </div>
+
+    <script>
+      const { createApp, onMounted, ref, nextTick } = Vue;
+
+      createApp({
+        setup() {
+          // intro
+          const introView = ref(false);
+
+          // top button
+          const btnView = ref(false);
+
+          // onMounted
+          onMounted(() => {
+            setTimeout(() => {
+              introView.value = false;
+              nextTick(() => {
+                scrollEnable();
+              }, 100);
+            }, 3000);
+
+            window.addEventListener("scroll", () => {
+              if (window.scrollY > 100) {
+                btnView.value = true;
+              } else {
+                btnView.value = false;
+              }
+            });
+          });
+          return {
+            introView,
+            btnView,
+            moveTop,
+            scrollEnable,
+          };
+
+          // 상단 이동
+          function moveTop() {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }
+
+          // 스크롤 enable
+          function scrollEnable() {
+            document.body.classList.remove("hidden");
+          }
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  font-family: "Nanum Gothic", sans-serif;
+}
+ul li {
+  list-style-type: none;
+}
+
+.graph ul li {
+  margin-top: 6px;
+}
+.graph ul li:first-child {
+  margin-top: 0;
+}
+.graph ul li .info_item {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 12px;
+}
+.graph ul li .info_item .bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: auto;
+  height: 100%;
+  border-radius: 12px;
+  background-color: #eee;
+  z-index: 0;
+}
+.graph ul li.active .info_item {
+  justify-content: space-between;
+  background-color: #2db400;
+}
+.graph ul li .info_item .text {
+  position: relative;
+  color: #000;
+  z-index: 2;
+}
+.graph ul li.active .info_item .text {
+  color: #fff;
+}
+.graph ul li.active .info_item .percentage {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #2db400;
+  z-index: 2;
+}
+.graph ul li .info_item .percentage .unit {
+  font-style: normal;
+}
+.graph .unit_value {
+  display: flex;
+  justify-content: space-between;
+}
